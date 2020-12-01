@@ -4,8 +4,6 @@ import kaushik.springframework.kaushikpetclinic.model.Owner;
 import kaushik.springframework.kaushikpetclinic.model.Vet;
 import kaushik.springframework.kaushikpetclinic.services.OwnerService;
 import kaushik.springframework.kaushikpetclinic.services.VetService;
-import kaushik.springframework.kaushikpetclinic.services.map.OwnerServiceMap;
-import kaushik.springframework.kaushikpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
@@ -14,11 +12,10 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
-    
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
 
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
@@ -57,5 +54,6 @@ public class DataLoader implements CommandLineRunner {
         vet2.setLastName("Porter");
 
         vetService.save(vet2);
+        System.out.println("exiting data loader");
     }
 }
